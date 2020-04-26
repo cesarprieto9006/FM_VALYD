@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">FM_Valid</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_Artist">Artist</string>
+    <string name="title_Track">Track</string>
+    <string name="error_main_page">Main page.</string>
+    <string name="error_end_page">End page</string>
 </resources>
