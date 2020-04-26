@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,8 +50,12 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
     @BindView(R.id.lblPage)
     TextView lblPage;
 
+    @BindView(R.id.lblTotalPages)
+    TextView lblTotalPage;
+
     @BindView(R.id.txtSearch)
     TextView txtSearch;
+
 
     private View root;
     private ArtistPresenter artistPresentert;
@@ -122,6 +127,8 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
         return false;
     }
 
+
+
     @Override
     public void showProgressBar() {
         progressBar.setVisibility(View.VISIBLE);
@@ -147,6 +154,11 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
         if(dataResponse.getTopartists().getAttr()!=null) {
             PageF=Integer.valueOf(dataResponse.getTopartists().getAttr().getTotalPages());
             lblPage.setText(dataResponse.getTopartists().getAttr().getPage());
+
+            if(PageF==0)
+                lblTotalPage.setText(" "+1);
+            else
+                lblTotalPage.setText(" "+PageF);
         }
     }
 
@@ -155,6 +167,11 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
         if(dataResponse.getResults().getQuery()!=null) {
             PageF=Integer.valueOf(dataResponse.getResults().getTotalResults())/Integer.valueOf(dataResponse.getResults().getItemsPerPage());
             lblPage.setText(dataResponse.getResults().getQuery().getStartPage());
+
+            if(PageF==0)
+                lblTotalPage.setText(" "+1);
+            else
+                lblTotalPage.setText(" "+PageF);
         }
     }
 

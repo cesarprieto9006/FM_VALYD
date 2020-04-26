@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "842988806781",
+    "firebase_url": "https://logistoup.firebaseio.com",
+    "project_id": "logistoup",
+    "storage_bucket": "logistoup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:842988806781:android:6e72a35e798027991d4714",
+        "android_client_info": {
+          "package_name": "com.example.fina.fm_valid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "842988806781-7a12fvgnglaagfref3l7lemm4nvb6r9u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fina.fm_valid",
+            "certificate_hash": "931bbbefac4f694cac347bbcdc935746257e9ed0"
+          }
+        },
+        {
+          "client_id": "842988806781-3jdgj2dj3sr1356g1vrvairckg4e3da5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8j7ysBXdPiWYKmokSUeSCz0FWIwpW07A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "842988806781-3jdgj2dj3sr1356g1vrvairckg4e3da5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

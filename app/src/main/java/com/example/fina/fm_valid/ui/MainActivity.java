@@ -1,7 +1,9 @@
 package com.example.fina.fm_valid.ui;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.fina.fm_valid.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -42,5 +44,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
     }
+
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+    }
+
+
+
 
 }
