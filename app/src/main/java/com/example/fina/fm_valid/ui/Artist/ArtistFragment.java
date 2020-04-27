@@ -13,17 +13,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fina.fm_valid.R;
-import com.example.fina.fm_valid.adapter.TransaccionAdapter;
+import com.example.fina.fm_valid.adapter.ArtistAdapter;
 import com.example.fina.fm_valid.model.Data_Artist;
 import com.example.fina.fm_valid.model.Data_Artist_Response;
-import com.example.fina.fm_valid.model.Data_Search_Response;
+import com.example.fina.fm_valid.model.Data_SearchA_Response;
 import com.example.fina.fm_valid.sqlite.SQLiteController;
 import com.example.fina.fm_valid.utils.Constant;
 
@@ -63,7 +62,7 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
 
     private View root;
     private ArtistPresenter artistPresentert;
-    private TransaccionAdapter transaccionAdapter;
+    private ArtistAdapter transaccionAdapter;
     private int PageF=1;
     private String TextS="";
     private SQLiteController sqLiteController;
@@ -85,8 +84,6 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
         rvArtist.setLayoutManager(new LinearLayoutManager(getContext()));
         rvArtist.setHasFixedSize(true);
         rvArtist.setItemAnimator(new DefaultItemAnimator());
-
-
     }
 
     private void setupMVP() {
@@ -181,7 +178,7 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
     }
 
     @Override
-    public void updatePageSearch(Data_Search_Response dataResponse) {
+    public void updatePageSearch(Data_SearchA_Response dataResponse) {
         if(dataResponse.getResults().getQuery()!=null) {
             PageF=Integer.valueOf(dataResponse.getResults().getTotalResults())/Integer.valueOf(dataResponse.getResults().getItemsPerPage());
             lblPage.setText(dataResponse.getResults().getQuery().getStartPage());
@@ -201,14 +198,13 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
     @Override
     public void stateArtist(ArrayList<Data_Artist> dataResponse) {
 
-        sqLiteController.DELETE_ARTIST_DATA();
+        sqLiteController.Delete_Artist();
         for(Data_Artist dataArtist:dataResponse) {
-            //sqLiteController.
-            sqLiteController.SAVE_ARTIST_DATA(dataArtist);
+            sqLiteController.Save_Artist(dataArtist);
         }
 
         if (transaccionAdapter == null) {
-            transaccionAdapter = new TransaccionAdapter(dataResponse, getContext());
+            transaccionAdapter = new ArtistAdapter(dataResponse, getContext());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             rvArtist.setLayoutManager(layoutManager);
             rvArtist.setAdapter(transaccionAdapter);
@@ -227,7 +223,7 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
         }
 
         if (transaccionAdapter == null) {
-            transaccionAdapter = new TransaccionAdapter(dataResponse, getContext());
+            transaccionAdapter = new ArtistAdapter(dataResponse, getContext());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
             rvArtist.setLayoutManager(layoutManager);
             rvArtist.setAdapter(transaccionAdapter);

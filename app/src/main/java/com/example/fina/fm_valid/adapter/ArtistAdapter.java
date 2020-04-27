@@ -16,17 +16,16 @@ import com.example.fina.fm_valid.model.Data_Artist;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TransaccionAdapter extends RecyclerView.Adapter<TransaccionAdapter.OrdenHolder> {
+public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.OrdenHolder> {
 
     private ArrayList<Data_Artist> dataArtist;
     private Context context;
 
-    public TransaccionAdapter(ArrayList<Data_Artist> dataArtists, Context context) {
+    public ArtistAdapter(ArrayList<Data_Artist> dataArtists, Context context) {
         this.dataArtist = dataArtists;
         this.context = context;
     }
@@ -47,9 +46,10 @@ public class TransaccionAdapter extends RecyclerView.Adapter<TransaccionAdapter.
     @Override
     public void onBindViewHolder(OrdenHolder holder, int position) {
         try {
+            String urlImage=dataArtist.get(position).getImageUrl();
             holder.lblListener.setText(dataArtist.get(position).getListeners());
             holder.lblName.setText(dataArtist.get(position).getName());
-            Picasso.with(context).load(dataArtist.get(position).getImage().get(2).getText()).
+            Picasso.with(context).load(urlImage).
                     placeholder(R.drawable.ic_launcher_background).into(holder.imgFoto);
             holder.setItemClickListener(new ItemClickListener() {
                 @Override

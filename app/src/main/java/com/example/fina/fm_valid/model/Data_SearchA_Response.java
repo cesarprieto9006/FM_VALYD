@@ -2,7 +2,7 @@ package com.example.fina.fm_valid.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Data_Search_Response {
+public class Data_SearchA_Response {
 
     @SerializedName("results")
     private Data_Results results;

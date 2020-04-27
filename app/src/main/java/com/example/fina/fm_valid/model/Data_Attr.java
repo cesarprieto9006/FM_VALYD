@@ -22,6 +22,17 @@ public class Data_Attr {
     @SerializedName("for")
     private String For="";
 
+    @SerializedName("rank")
+    private String rank="";
+
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
     public String getFor() {
         return For;
     }

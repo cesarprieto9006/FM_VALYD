@@ -19,8 +19,19 @@ public class Data_Results {
     @SerializedName("artistmatches")
     private Data_Artist_Matche artistmatches;
 
+    @SerializedName("trackmatches")
+    private Data_Track_Matche trackmatches;
+
     @SerializedName("@attr")
     private Data_Attr attr;
+
+    public Data_Track_Matche getTrackmatches() {
+        return trackmatches;
+    }
+
+    public void setTrackmatches(Data_Track_Matche trackmatches) {
+        this.trackmatches = trackmatches;
+    }
 
     public Data_Query getQuery() {
         return Query;

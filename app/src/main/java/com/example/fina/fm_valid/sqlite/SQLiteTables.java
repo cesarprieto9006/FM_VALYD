@@ -27,13 +27,13 @@ public class SQLiteTables {
     public static final String COL_TRACK_MBID = " col_track_mbid";
     public static final String COL_TRACK_NAME = " col_track_name";
     public static final String COL_TRACK_IMAGE = " col_track_image";
-    public static final String COL_TRACK_PLAYCOUNT = " col_track_playcount";
+    public static final String COL_TRACK_LISTENERS = " col_track_listeners";
     public static final String COL_TRACK_ARTIST = " col_track_artist";
     public static final String COL_TRACK_URL = " col_track_url";
 
 
     public static final String DB_TRACK = "CREATE TABLE " + TABLE_TRACK + "(" + COL_TRACK_ID + " INTEGER PRIMARY KEY, "
             + COL_TRACK_DURATION + " TEXT, " + COL_TRACK_MBID + " TEXT, " + COL_TRACK_NAME + " TEXT, " + COL_TRACK_IMAGE + " TEXT, "
-            + COL_TRACK_PLAYCOUNT + " TEXT, " + COL_TRACK_ARTIST + " TEXT, " + COL_TRACK_URL+ " TEST "+ ")";
+            + COL_TRACK_LISTENERS + " TEXT, " + COL_TRACK_ARTIST + " TEXT, " + COL_TRACK_URL+ " TEST "+ ")";
 
 }

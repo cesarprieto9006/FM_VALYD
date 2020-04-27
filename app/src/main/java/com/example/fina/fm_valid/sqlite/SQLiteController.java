@@ -5,6 +5,8 @@ import android.content.Context;
 
 
 import com.example.fina.fm_valid.model.Data_Artist;
+import com.example.fina.fm_valid.model.Data_Track;
+import com.example.fina.fm_valid.model.Data_Track_S;
 
 import java.util.ArrayList;
 
@@ -17,7 +19,7 @@ public class SQLiteController {
         sqLiteHelper = new SQLiteHelper(context);
     }
 
-    public boolean SAVE_ARTIST_DATA(Data_Artist artist){
+    public boolean Save_Artist(Data_Artist artist){
 
         int num = (int) (Math.random() * 1000000) + 1;
 
@@ -32,7 +34,7 @@ public class SQLiteController {
         return sqLiteHelper.INSERT_DATA(SQLiteTables.TABLE_ARTIST, values);
     }
 
-    public boolean DELETE_ARTIST_DATA(){
+    public boolean Delete_Artist(){
         return sqLiteHelper.Delete_DATA(SQLiteTables.TABLE_ARTIST);
     }
 
@@ -45,24 +47,47 @@ public class SQLiteController {
     }
 
 
+    public boolean Delete_Track(){
+        return sqLiteHelper.Delete_DATA(SQLiteTables.TABLE_TRACK);
+    }
 
-    /*public boolean SAVE_TRACK_DATA(Track track){
+    public boolean Save_Track(Data_Track dataTrack){
 
         int num = (int) (Math.random() * 1000000) + 1;
 
         ContentValues values = new ContentValues();
         values.put(SQLiteTables.COL_TRACK_ID, num);
-        values.put(SQLiteTables.COL_TRACK_MBID, track.getMbid());
-        values.put(SQLiteTables.COL_TRACK_NAME, track.getName());
-        values.put(SQLiteTables.COL_TRACK_PLAYCOUNT, track.getPlaycount());
-        values.put(SQLiteTables.COL_TRACK_URL, track.getUrl());
-        values.put(SQLiteTables.COL_TRACK_IMAGE, track.getImageUrl());
-        values.put(SQLiteTables.COL_TRACK_DURATION, track.getDuration());
-        values.put(SQLiteTables.COL_TRACK_ARTIST, String.valueOf(track.getArtist()));
+        values.put(SQLiteTables.COL_TRACK_MBID, dataTrack.getMbid());
+        values.put(SQLiteTables.COL_TRACK_NAME, dataTrack.getName());
+        values.put(SQLiteTables.COL_TRACK_LISTENERS, dataTrack.getListeners());
+        values.put(SQLiteTables.COL_TRACK_URL, dataTrack.getUrl());
+        values.put(SQLiteTables.COL_TRACK_IMAGE, dataTrack.getImageUrl());
+        values.put(SQLiteTables.COL_TRACK_DURATION, dataTrack.getDuration());
+        values.put(SQLiteTables.COL_TRACK_ARTIST, String.valueOf(dataTrack.getNameArtist()));
         return sqLiteHelper.INSERT_DATA(SQLiteTables.TABLE_TRACK, values);
-    }*/
+    }
 
-    /*public Track getTrackDetail(String name){
-        return sqLiteHelper.getTrackDetail(name);
-    }*/
+    public boolean Save_Track_Search(Data_Track_S dataTrack){
+
+        int num = (int) (Math.random() * 1000000) + 1;
+
+        ContentValues values = new ContentValues();
+        values.put(SQLiteTables.COL_TRACK_ID, num);
+        values.put(SQLiteTables.COL_TRACK_MBID, dataTrack.getMbid());
+        values.put(SQLiteTables.COL_TRACK_NAME, dataTrack.getName());
+        values.put(SQLiteTables.COL_TRACK_LISTENERS, dataTrack.getListeners());
+        values.put(SQLiteTables.COL_TRACK_URL, dataTrack.getUrl());
+        values.put(SQLiteTables.COL_TRACK_IMAGE, dataTrack.getImageUrl());
+        values.put(SQLiteTables.COL_TRACK_DURATION, dataTrack.getDuration());
+        values.put(SQLiteTables.COL_TRACK_ARTIST, String.valueOf(dataTrack.getArtist()));
+        return sqLiteHelper.INSERT_DATA(SQLiteTables.TABLE_TRACK, values);
+    }
+
+    public ArrayList<Data_Track> getTrackDetail(){
+        return sqLiteHelper.getArrayTrack();
+    }
+
+    public ArrayList<Data_Track_S> getTrackSearchDetail(String text){
+        return sqLiteHelper.getArraySearchTrack(text);
+    }
 }
