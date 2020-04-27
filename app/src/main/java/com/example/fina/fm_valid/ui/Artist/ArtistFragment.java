@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import com.example.fina.fm_valid.adapter.TransaccionAdapter;
 import com.example.fina.fm_valid.model.Data_Artist;
 import com.example.fina.fm_valid.model.Data_Artist_Response;
 import com.example.fina.fm_valid.model.Data_Search_Response;
+import com.example.fina.fm_valid.sqlite.SQLiteController;
 import com.example.fina.fm_valid.utils.Constant;
 
 import java.util.ArrayList;
@@ -56,12 +58,15 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
     @BindView(R.id.txtSearch)
     TextView txtSearch;
 
+    @BindView(R.id.lyPage)
+    LinearLayout lyPage;
 
     private View root;
     private ArtistPresenter artistPresentert;
     private TransaccionAdapter transaccionAdapter;
     private int PageF=1;
     private String TextS="";
+    private SQLiteController sqLiteController;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -76,9 +81,12 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
 
     private void setupView() {
         ButterKnife.bind(this, root);
+        sqLiteController = new SQLiteController(getContext());
         rvArtist.setLayoutManager(new LinearLayoutManager(getContext()));
         rvArtist.setHasFixedSize(true);
         rvArtist.setItemAnimator(new DefaultItemAnimator());
+
+
     }
 
     private void setupMVP() {
@@ -140,6 +148,16 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
     }
 
     @Override
+    public void showLyPage() {
+        lyPage.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLyPage() {
+        lyPage.setVisibility(View.GONE);
+    }
+
+    @Override
     public void showList() {
         rvArtist.setVisibility(View.VISIBLE);
     }
@@ -182,6 +200,32 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
 
     @Override
     public void stateArtist(ArrayList<Data_Artist> dataResponse) {
+
+        sqLiteController.DELETE_ARTIST_DATA();
+        for(Data_Artist dataArtist:dataResponse) {
+            //sqLiteController.
+            sqLiteController.SAVE_ARTIST_DATA(dataArtist);
+        }
+
+        if (transaccionAdapter == null) {
+            transaccionAdapter = new TransaccionAdapter(dataResponse, getContext());
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+            rvArtist.setLayoutManager(layoutManager);
+            rvArtist.setAdapter(transaccionAdapter);
+        }else {
+            transaccionAdapter.setData(dataResponse);
+        }
+    }
+
+    @Override
+    public void getDatabase(String Text) {
+        ArrayList<Data_Artist> dataResponse = new ArrayList<>();
+        if(Text.equals("")) {
+            dataResponse = sqLiteController.getArtistDetail();
+        }else {
+            dataResponse = sqLiteController.getSearchArtistDetail(Text);
+        }
+
         if (transaccionAdapter == null) {
             transaccionAdapter = new TransaccionAdapter(dataResponse, getContext());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -193,8 +237,5 @@ public class ArtistFragment extends Fragment implements ArtistViewInterface{
 
     }
 
-    @Override
-    public boolean validate() {
-        return false;
-    }
+
 }

@@ -24,6 +24,24 @@ public class Data_Artist {
     @SerializedName("image")
     private ArrayList<Data_Image> image;
 
+    private String ImageUrl ="";
+
+    public String getImageUrl() {
+        if (getImage() != null && getImage().size() > 0) {
+            for (Data_Image img :
+                    getImage()) {
+                if (img.getSize().equalsIgnoreCase("large")) {
+                    return img.getText();
+                }
+            }
+        }
+        return null;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }

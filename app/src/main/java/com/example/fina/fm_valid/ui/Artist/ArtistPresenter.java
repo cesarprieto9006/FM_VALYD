@@ -24,7 +24,8 @@ import retrofit2.HttpException;
 public class ArtistPresenter implements ArtistPresenterInterface {
 
     private ArtistViewInterface artistViewInterface;
-    private String TAG = "LoginPresenter";
+    private String TAG = "Artist";
+    private String Text1="";
 
 
     public ArtistPresenter(ArtistViewInterface artistViewInterface) {
@@ -35,13 +36,16 @@ public class ArtistPresenter implements ArtistPresenterInterface {
     public void getArtist(String Country, String Key, int Limit, int Page) {
         artistViewInterface.showProgressBar();
         artistViewInterface.hideList();
+        artistViewInterface.hideLyPage();
         getObservableArtist(Country,Key,Limit,Page).subscribeWith(getObserverArtist());
     }
 
     @Override
     public void getSearchArtist(String Name, String Key, int Limit, int Page) {
+        Text1=Name;
         artistViewInterface.showProgressBar();
         artistViewInterface.hideList();
+        artistViewInterface.hideLyPage();
         getObservableSearchArtist(Name,Key,Limit,Page).subscribeWith(getObserverSearchArtist());
     }
 
@@ -74,6 +78,7 @@ public class ArtistPresenter implements ArtistPresenterInterface {
 
                 artistViewInterface.hideProgressBar();
                 artistViewInterface.showList();
+                artistViewInterface.showLyPage();
                 artistViewInterface.stateArtist(dataResponseObject.getTopartists().getArtist());
                 artistViewInterface.updatePageArtist(dataResponseObject);
 
@@ -100,6 +105,8 @@ public class ArtistPresenter implements ArtistPresenterInterface {
                     error.printStackTrace();
                 }
 
+                artistViewInterface.getDatabase("");
+                artistViewInterface.showList();
                 artistViewInterface.hideProgressBar();
                 artistViewInterface.displayError(errMsg);
             }
@@ -118,10 +125,12 @@ public class ArtistPresenter implements ArtistPresenterInterface {
             public void onNext(@NonNull Data_Search_Response dataResponseObject) {
                 Log.d(TAG, "OnNext");
 
+                artistViewInterface.showLyPage();
                 artistViewInterface.hideProgressBar();
                 artistViewInterface.showList();
                 artistViewInterface.stateArtist(dataResponseObject.getResults().getArtistmatches().getArtist());
                 artistViewInterface.updatePageSearch(dataResponseObject);
+                artistViewInterface.showLyPage();
 
             }
 
@@ -145,7 +154,8 @@ public class ArtistPresenter implements ArtistPresenterInterface {
                 } catch (Exception error) {
                     error.printStackTrace();
                 }
-
+                artistViewInterface.getDatabase(Text1);
+                artistViewInterface.showList();
                 artistViewInterface.hideProgressBar();
                 artistViewInterface.displayError(errMsg);
             }

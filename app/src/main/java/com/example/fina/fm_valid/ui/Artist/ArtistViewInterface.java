@@ -13,6 +13,10 @@ public interface ArtistViewInterface {
 
     void hideProgressBar();
 
+    void showLyPage();
+
+    void hideLyPage();
+
     void showList();
 
     void hideList();
@@ -25,7 +29,7 @@ public interface ArtistViewInterface {
 
     void stateArtist(ArrayList<Data_Artist> dataResponse);
 
-    boolean validate();
+    void getDatabase(String text);
 
 
 }
